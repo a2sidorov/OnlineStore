@@ -1,4 +1,4 @@
-package dev.a2.springdemo.web;
+package dev.a2.onlinestore.controller;
 
 import javax.validation.Valid;
 
@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import dev.a2.springdemo.model.User;
-import dev.a2.springdemo.service.UserService;
-import dev.a2.springdemo.web.dto.UserRegistrationDto;
+import dev.a2.onlinestore.dto.UserRegistrationDto;
+import dev.a2.onlinestore.model.User;
+import dev.a2.onlinestore.service.UserService;
 
 @Controller
 @RequestMapping("/registration")

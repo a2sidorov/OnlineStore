@@ -1,4 +1,4 @@
-package dev.a2.springdemo.validation;
+package dev.a2.onlinestore.validation;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

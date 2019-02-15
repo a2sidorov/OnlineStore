@@ -1,4 +1,4 @@
-package dev.a2.springdemo.web;
+package dev.a2.onlinestore.controller;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class MainController {
-	
 
 	// GET login page
    	@GetMapping(path="/login")
@@ -16,12 +15,6 @@ public class MainController {
    		return "login";
     }
 	
-	// GET home page
- 	@GetMapping(path="/")
- 	public String showHomePage() {
-         return "home";
-     }
- 	
   	// GET hello page
   	@GetMapping(path="/profile")
   	public String showProfilePage(Model model) {

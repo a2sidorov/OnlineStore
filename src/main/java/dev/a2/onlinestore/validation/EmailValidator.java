@@ -1,4 +1,4 @@
-package dev.a2.springdemo.validation;
+package dev.a2.onlinestore.validation;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

@@ -1,4 +1,4 @@
-package dev.a2.springdemo.config;
+package dev.a2.onlinestore.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -6,9 +6,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import dev.a2.springdemo.service.UserService;
+
+import dev.a2.onlinestore.service.UserService;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -21,7 +23,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .antMatchers("/registration").permitAll()
+                .antMatchers("/", "/test").permitAll()
+                .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
@@ -50,14 +53,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.authenticationProvider(authenticationProvider());
     }
     
-    /*
+    
     @Override
     public void configure(WebSecurity web) throws Exception {
         web
             .ignoring()
-            .antMatchers("/scripts/**");
+            .antMatchers("/css/**")
+        	.antMatchers("/img/**");
     }
-    */
+    
   
 
     

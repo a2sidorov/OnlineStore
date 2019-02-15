@@ -1,9 +1,9 @@
-package dev.a2.springdemo.web.dto;
+package dev.a2.onlinestore.dto;
 
 import javax.validation.constraints.Size;
 
-import dev.a2.springdemo.validation.FieldMatch;
-import dev.a2.springdemo.validation.ValidEmail;
+import dev.a2.onlinestore.validation.FieldMatch;
+import dev.a2.onlinestore.validation.ValidEmail;
 
 
 @FieldMatch(field = "password", fieldMatch = "confirmPassword")

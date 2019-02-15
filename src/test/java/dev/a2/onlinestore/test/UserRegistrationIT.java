@@ -1,4 +1,4 @@
-package dev.a2.springdemo.test;
+package dev.a2.onlinestore.test;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

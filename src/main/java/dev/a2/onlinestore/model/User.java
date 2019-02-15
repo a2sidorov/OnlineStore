@@ -1,16 +1,16 @@
-package dev.a2.springdemo.model;
+package dev.a2.onlinestore.model;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name="user")
+@Table(name="users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="user_id", updatable = false, nullable = false)
-    private int id;
+    private Long id;
 
     @Column(name="email", nullable=false, unique=true)
     private String email;
@@ -22,7 +22,7 @@ public class User {
     private int isActive;
 
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    @JoinTable(name="user_role",joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JoinTable(name="users_roles",joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
     public User() {
@@ -36,11 +36,11 @@ public class User {
 		this.roles = user.getRoles();
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

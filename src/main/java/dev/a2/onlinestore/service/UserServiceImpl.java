@@ -1,4 +1,4 @@
-package dev.a2.springdemo.service;
+package dev.a2.onlinestore.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -8,11 +8,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import dev.a2.springdemo.model.Role;
-import dev.a2.springdemo.model.User;
-import dev.a2.springdemo.repos.UsersRepository;
-import dev.a2.springdemo.service.UserServiceImpl;
-import dev.a2.springdemo.web.dto.UserRegistrationDto;
+import dev.a2.onlinestore.dto.UserRegistrationDto;
+import dev.a2.onlinestore.model.Role;
+import dev.a2.onlinestore.model.User;
+import dev.a2.onlinestore.repos.UsersRepository;
+import dev.a2.onlinestore.service.UserServiceImpl;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
     	newUser.setIsActive(1);
     	Set<Role> set = new HashSet<>();
     	Role role = new Role();
-    	role.setRoleName("USER");
+    	role.setName("USER");
     	set.add(role);
         newUser.setRoles(set);
         return usersRepository.save(newUser);
@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
     
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles){
         return roles.stream()
-                .map(role -> new SimpleGrantedAuthority(role.getRoleName()))
+                .map(role -> new SimpleGrantedAuthority(role.getName()))
                 .collect(Collectors.toList());
     }
 
