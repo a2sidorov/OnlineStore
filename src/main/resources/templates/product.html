@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"></head>
+<body>
+   	<div th:replace="fragments/header :: header"></div>
+   	
+	<div class="product-grid">
+	
+		<div class="product-image">
+			<img th:src="${product.imageUrl}" alt="">
+		</div>
+		
+		<div class="product-info">
+			<div th:text="${product.name}"></div>
+			<div> Description: </div>
+		</div>
+		
+		<div class="product-buy">
+			<div th:text="'$' + ${product.price}"></div>
+			 <form action="#" th:action="'/' + ${product.id}" th:object="${orderProductDto}" method="post">
+			 	<input type="hidden" th:field="*{product}" th:value="${product}">
+			 	<input id="quantityInput" type="hidden" th:field="*{quantity}" th:value="*{quantity}">
+			 	<span>Quantity:</span>
+			 	<span id="quantity">1</span>
+			 	<div class="product-quantity">
+			 		<button type="button" onclick="subtractQuantity()"> - </button>
+            		<button type="button" onclick="addQuantity()"> + </button>
+			 	</div>
+				<button id="addToCart" type="submit">Add to Cart</button>
+			</form>
+		</div>
+		
+	</div>
+	<script src="/js/product.js"></script>
+</body>
+</html>

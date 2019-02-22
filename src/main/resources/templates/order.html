@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"></head>
+<body>
+   	<div th:replace="fragments/header :: header"></div>
+	<div class="order-grid">
+		<table class="order-table">
+			<tr class="table-product">
+			    <th></th>
+			    <th></th>
+			    <th>Price</th>
+			    <th>Quantity</th>
+			</tr>
+			<tr class="table-product" th:each="op : ${order.getOrderProducts()}">
+			    <td class="product-image"> <img th:src="${op.getProduct().getImageUrl()}" alt=""></td>
+			    <td class="product-info" th:text="${op.getProduct().getName()}"></td>
+			    <td class="product-price" th:text="'$' + ${op.getProduct().getPrice()}"></td>
+			    <!-- <td class="product-quantity" th:text="${op.getQuantity()}"> -->
+			    <td class="product-quantity">
+			    	<div id="quantity" th:text="${op.getQuantity()}"></div>
+			    	<!--
+			 		<button type="button" th:onclick="'javascript:subtractQuantity(' + ${op.getProduct().getId()} + ')'"> - </button>
+			 		<button type="button" th:onclick="'javascript:addQuantity(' + ${op.getProduct().getId()} + ')'"> + </button>
+			 		-->
+			 		<a th:href="@{'/order/quantity'(action=subtract, id=${op.getProduct().getId()})}"> - </a>
+			 		<a th:href="@{'/order/quantity'(action=add, id=${op.getProduct().getId()})}"> + </a>
+			 		
+			 	</td>
+			    
+			    <!-- </td> -->
+			</tr>
+			<tr class="table-product">
+			    <td></td>
+			    <td></td>
+			    <td>Total price:</td>
+			    <td th:text="'$' + ${order.getTotalOrderPrice().toString()}"></td>
+			</tr>
+		</table>
+		
+	</div>
+	<script src="/js/order.js"></script>
+
+</body>
+</html>

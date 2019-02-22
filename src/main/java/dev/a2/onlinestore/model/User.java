@@ -12,16 +12,16 @@ public class User {
     @Column(name="user_id", updatable = false, nullable = false)
     private Long id;
 
-    @Column(name="email", nullable=false, unique=true)
+    @Column(name="email", unique=true)
     private String email;
 
-    @Column(name="password", nullable=false, columnDefinition="char(60)")
+    @Column(name="password", columnDefinition="char(60)")
     private String password;
 
-	@Column(name="active", nullable=false, columnDefinition="tinyint(1)")
+	@Column(name="active", columnDefinition="tinyint(1)")
     private int isActive;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinTable(name="users_roles",joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
@@ -78,11 +78,14 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + 
-				", email=" + email + 
-				", password=" + password + 
-				", isActive=" + isActive + 
-				", roles=" + roles + "]";
+		return "User [id=" + id + ", email=" + email + ", password=" + password + ", isActive=" + isActive + ", roles="
+				+ roles + "]";
 	}
+
+	
+
+	
+
+	
 	
 }

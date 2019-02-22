@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import dev.a2.onlinestore.service.UserService;
@@ -18,12 +19,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     UserService userService;
     
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .antMatchers("/", "/test").permitAll()
+                .antMatchers("/", "/*", "/order/quantity/**").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
@@ -33,6 +33,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
             .logout()
                 .permitAll();
+         http.sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.ALWAYS);
+         
+           http.csrf().disable();
     }
     
     @Bean
@@ -59,6 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web
             .ignoring()
             .antMatchers("/css/**")
+            .antMatchers("/js/**")
         	.antMatchers("/img/**");
     }
     

@@ -1,0 +1,5 @@
+<div class="topnav" th:fragment="header">
+	<a href="/order" th:text="'Cart (' + ${order.getNumberOfProducts()} + ')'">Cart</a>
+	<a href="#home">Sign in</a>
+	<a href="/">Home</a>
+</div>
