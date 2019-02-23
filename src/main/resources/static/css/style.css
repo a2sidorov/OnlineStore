@@ -134,71 +134,107 @@
 	grid-template-columns: auto auto;
 }
 
-.order-grid table, td, th {
+.order-grid .order-table table, td, th {
   border-bottom: 1px solid;
   text-align: center;
 }
 
-.order-grid table, tbody {
+.order-grid .order-table table, tbody {
 	border-bottom: none;
 }
 
-.order-grid table, tr:last-child > td {
+.order-grid .order-table table, tr:last-child > td {
 	border-bottom: none;
 }
 
-.order-grid .product-image {
+.order-grid .order-table .product-image {
 	margin: 0 auto;
 	width: 120px;
 	height: 120px;
 }
 
-.order-grid .product-image img {
+.order-grid .order-table .product-image img {
 	max-width: 100%;
 	max-height: 100%;
 }
 
-.order-grid .product-info {
+.order-grid .order-table .product-info {
 	margin: 0 auto;
 }
 
-.order-grid .product-price {
+.order-grid .order-table .product-info a {
+	font-size: 12px;
+	cursor: pointer;
+	margin-top: 64px;
+}
+
+.order-grid .order-table .product-price {
 	margin: 0 auto;
 }
 
-.order-grid .product-quantity {
+.order-grid .order-table .product-quantity {
 	margin: 0 auto;
 }
 
-/*
-.order-grid .product-quantity button {
-	background-color: var(--main-active-color);
-	color: white;
-	font-size: 16px;
-    cursor: pointer;
-    width: 32px;
-    border: none;
-}
-*/
 
-.order-grid .product-quantity a {
+
+
+
+.order-grid .order-table .quantity-buttons {
 	background-color: var(--main-active-color);
 	color: white;
 	font-size: 14px;
-	padding-right: 10px;
-	padding-left: 10px;
-	margin: 1px;
+	padding: 0px 10px;
+	margin: 2px;
 	text-align: center;
 	text-decoration: none;
 }
 
-.order-grid .product-quantity a:hover, a:active {
+.order-grid .order-table .product-quantity a:hover, a:active {
 	background-color: var(--main-active-flick-color);
 }
 
+.order-grid .order-table #remove-button {
+	margin-top: 14px;
+}
 
-.order-grid .total-price {
+
+.order-grid .order-table #remove-button a {
+	background-color: var(--main-active-color);
+	color: white;
+	font-size: 12px;
+    cursor: pointer;
+    padding: 0px 8px;
+    border: none; 
+}
+
+.order-grid .order-table #remove-button a:hover, a:active {
+	background-color: var(--main-active-flick-color);
+}
+
+.order-grid .order-table .total-price {
 	text-align: right;
+}
+
+.order-grid .order-checkout {
+	text-align: center;
+}
+
+.order-grid .order-checkout a {
+	background-color: var(--main-active-color);
+	border: none;
+	color: white;
+	padding: 7px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	cursor: pointer;
+	margin-top: 50px;
+}
+
+.order-grid .order-checkout a:hover, a:active {
+	background-color: var(--main-active-flick-color);
 }
 
 
@@ -206,12 +242,14 @@
 @media only screen and (max-width: 425px) {
 	.home-grid { grid-template-columns: auto auto; }
 	.product-grid { grid-template-areas: 'image buy' 'info info'; }
+	.order-grid { grid-template-columns: auto; }
 }
 
 /* Tablet Styles */
 @media only screen and (min-width: 426px) and (max-width: 960px) {
 	.home-grid { grid-template-columns: auto auto auto auto auto; }
 	.product-grid { grid-template-areas: 'image info buy'; }
+	.order-grid { grid-template-columns: auto auto; }
 }
 
 
@@ -220,5 +258,6 @@
 @media only screen and (min-width: 961px) {
 	.home-grid { grid-template-columns: auto auto auto auto auto auto auto; }
 	.product-grid { grid-template-areas: 'image info buy';}
+	.order-grid { grid-template-columns: auto auto; }
 }
 

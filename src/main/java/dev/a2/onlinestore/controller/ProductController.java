@@ -40,7 +40,7 @@ public class ProductController {
   		return "home";
     }
   	
-   	@GetMapping("/{productId}")
+   	@GetMapping("/product/{productId}")
    	public String showProduct(Model model, @PathVariable String productId) {
    		Product product = productService.findById(Long.parseLong(productId));
    		model.addAttribute("product", product);
@@ -50,7 +50,7 @@ public class ProductController {
    		return "product";
     }
    	
- 	@PostMapping("/{productId}")
+ 	@PostMapping("/product/{productId}")
  	public String processOrder(HttpSession session,
  			@PathVariable String productId,
  			@ModelAttribute("orderProductDto") OrderProductDto orderProductDto) {
@@ -77,7 +77,7 @@ public class ProductController {
 		}
 
  		
- 		return "redirect:/" + productId;
+ 		return "redirect:/product/" + productId;
  	}
      
 	

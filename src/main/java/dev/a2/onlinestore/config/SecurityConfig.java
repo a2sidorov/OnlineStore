@@ -23,7 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .antMatchers("/", "/*", "/order/quantity/**").permitAll()
+                .antMatchers("/", "/product/*", "/order/**").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
@@ -36,7 +36,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
          http.sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.ALWAYS);
          
-           http.csrf().disable();
     }
     
     @Bean

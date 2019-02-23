@@ -17,7 +17,7 @@
 		
 		<div class="product-buy">
 			<div th:text="'$' + ${product.price}"></div>
-			 <form action="#" th:action="'/' + ${product.id}" th:object="${orderProductDto}" method="post">
+			 <form action="#" th:action="'/product/' + ${product.id}" th:object="${orderProductDto}" method="post">
 			 	<input type="hidden" th:field="*{product}" th:value="${product}">
 			 	<input id="quantityInput" type="hidden" th:field="*{quantity}" th:value="*{quantity}">
 			 	<span>Quantity:</span>

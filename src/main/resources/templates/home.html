@@ -6,7 +6,7 @@
 	<div class="home-grid">
  		<div class="product" th:each="product: ${products}">
 			<div class="product-image">
-				<a th:href="@{/{id}(id=${product.id})}"><img th:src="${product.imageUrl}" alt=""></a>
+				<a th:href="@{/product/{id}(id=${product.id})}"><img th:src="${product.imageUrl}" alt=""></a>
 			</div>
 			<div class="product-bottom">
 				<div th:text="'$' + ${product.price}"></div>

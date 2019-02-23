@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import dev.a2.onlinestore.dto.OrderProductDto;
@@ -30,10 +31,9 @@ public class OrderController {
 	}
 	
 	@GetMapping("/order/quantity")
-   	public String updateQuantity(HttpSession session, 
+   	public String updateQuantity(@SessionAttribute("order") Order order,
    			@RequestParam String action,  
    			@RequestParam String id) {
-		Order order = (Order) session.getAttribute("order");
 		order.getOrderProducts().stream().forEach(op -> {
 			if (op.getProduct().getId() == Long.parseLong(id)) {
 				if (action.equals("add")) {
@@ -47,6 +47,14 @@ public class OrderController {
 		});
    		return "redirect:/order";
     }
+	
+	@GetMapping("/order/remove")
+   	public String updateQuantity(@SessionAttribute("order") Order order, @RequestParam String id) {
+		order.getOrderProducts().removeIf(p -> p.getProduct().getId() == Long.parseLong(id));
+   		return "redirect:/order";
+    }
+
+	
 	
 	/*
 	@PostMapping("/order/quantity/add")
