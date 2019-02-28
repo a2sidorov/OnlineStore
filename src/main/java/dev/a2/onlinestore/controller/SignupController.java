@@ -11,31 +11,31 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import dev.a2.onlinestore.dto.UserRegistrationDto;
+import dev.a2.onlinestore.dto.UserSignupDto;
 import dev.a2.onlinestore.model.User;
 import dev.a2.onlinestore.service.UserService;
 
 @Controller
-@RequestMapping("/registration")
-public class RegistrationController {
+@RequestMapping("/signup")
+public class SignupController {
 	
 	@Autowired
     private UserService userService;
 	
 	@ModelAttribute("user")
-    public UserRegistrationDto registrationModel() {
-        return new UserRegistrationDto();
+    public UserSignupDto signupModel() {
+        return new UserSignupDto();
     }
 	
 	@GetMapping
-    public String showRegistrationForm(Model model) {
-		model.addAttribute("registration", new User());
-        return "registration";
+    public String showSignupForm(Model model) {
+		model.addAttribute("signup", new User());
+        return "signup";
     }
 	
 	@PostMapping
-    public String registerUserAccount(
-    		@ModelAttribute("user") @Valid UserRegistrationDto userDto,
+    public String signup(
+    		@ModelAttribute("user") @Valid UserSignupDto userDto,
     		BindingResult result) {
 		User existing = userService.findByEmail(userDto.getEmail());
 		
@@ -44,11 +44,11 @@ public class RegistrationController {
         }
 
         if (result.hasErrors()){
-            return "registration";
+            return "signup";
         }
 
         userService.save(userDto);
-        return "redirect:/login";
+        return "redirect:/signin";
     }
 
 }

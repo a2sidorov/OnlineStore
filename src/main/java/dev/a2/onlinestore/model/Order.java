@@ -22,12 +22,17 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonFormat(pattern = "dd/MM/yyyy") private LocalDate dateCreated;
+    @JsonFormat(pattern = "dd/MM/yyyy") 
+    private LocalDate dateCreated;
 
     private String status;
     
-    @Column(name="session_id")
-    private String sessionId;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+    
+    //@Column(name="session_id")
+    //private String sessionId;
 
     @OneToMany(mappedBy = "pk.order")
     @Valid
@@ -41,6 +46,8 @@ public class Order {
         }
         return sum;
     }
+    
+    
 
     public Long getId() {
         return id;
@@ -66,12 +73,12 @@ public class Order {
         this.status = status;
     }
 
-    public String getSessionId() {
-		return sessionId;
-	}
+    //public String getSessionId() {
+		//return sessionId;
+	//}
 
 	public void setSessionId(String sessionId) {
-		this.sessionId = sessionId;
+		//this.sessionId = sessionId;
 	}
 
 	public List<OrderProduct> getOrderProducts() {
@@ -87,11 +94,7 @@ public class Order {
         return this.orderProducts.stream().mapToInt(p -> p.getQuantity()).sum();
     }
 
-	@Override
-	public String toString() {
-		return "Order [id=" + id + ", dateCreated=" + dateCreated + ", status=" + status + ", sessionId=" + sessionId
-				+ ", orderProducts=" + orderProducts + "]";
-	}
+
     
     
 }

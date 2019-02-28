@@ -13,6 +13,4 @@ public interface OrderService {
     Order create(@NotNull(message = "The order cannot be null.") @Valid Order order);
 
     void update(@NotNull(message = "The order cannot be null.") @Valid Order order);
-    
-    Order findBySessionId(String sessionId);
 }

@@ -1,33 +1,40 @@
 package dev.a2.onlinestore.test;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.web.servlet.MockMvc;
-
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+
+@ExtendWith(SpringExtension.class)
 @SpringBootTest
-@ActiveProfiles("it")
-@AutoConfigureMockMvc
-@RunWith(SpringJUnit4ClassRunner.class)
-public class UserRegistrationIT {
+public class UserSignupIT {
+	
+	@Autowired
+    private WebApplicationContext wac;
 
-    @Autowired
     private MockMvc mockMvc;
+    
+	@BeforeEach
+    void setup() {
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+    }
 
     @Test
     public void submitRegistrationAccountExists() throws Exception {
         this.mockMvc
                 .perform(
-                        post("/registration")
+                        post("/signup")
                                 .with(csrf())
                                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                                 .param("email", "test@test.dev")
@@ -38,12 +45,12 @@ public class UserRegistrationIT {
                 .andExpect(model().attributeHasFieldErrors("user", "email"))
                 .andExpect(status().isOk());
     }
-
+    
     @Test
     public void submitRegistrationPasswordNotMatching() throws Exception {
         this.mockMvc
                 .perform(
-                        post("/registration")
+                        post("/signup")
                                 .with(csrf())
                                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                                 .param("email", "test@test.dev")
@@ -59,7 +66,7 @@ public class UserRegistrationIT {
     public void submitRegistrationEmailNotValid() throws Exception {
         this.mockMvc
                 .perform(
-                        post("/registration")
+                        post("/signup")
                                 .with(csrf())
                                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                                 .param("email", "test@test..test.dev")
@@ -75,14 +82,14 @@ public class UserRegistrationIT {
     public void submitRegistrationSuccess() throws Exception {
         this.mockMvc
                 .perform(
-                        post("/registration")
+                        post("/signup")
                                 .with(csrf())
                                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                                 .param("email", "newemail@test.dev")
                                 .param("password", "password")
                                 .param("confirmPassword", "password")
                 )
-                .andExpect(redirectedUrl("/login"))
+                .andExpect(redirectedUrl("/signin"))
                 .andExpect(status().is3xxRedirection());
     }
 

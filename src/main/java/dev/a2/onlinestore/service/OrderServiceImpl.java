@@ -32,9 +32,4 @@ public class OrderServiceImpl implements OrderService {
     public void update(Order order) {
         this.orderRepository.save(order);
     }
-
-	@Override
-	public Order findBySessionId(String sessionId) {
-		return orderRepository.findBySessionId(sessionId);
-	}
 }

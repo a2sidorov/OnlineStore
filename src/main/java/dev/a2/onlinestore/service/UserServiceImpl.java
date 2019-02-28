@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import dev.a2.onlinestore.dto.UserRegistrationDto;
+import dev.a2.onlinestore.dto.UserSignupDto;
 import dev.a2.onlinestore.model.Role;
 import dev.a2.onlinestore.model.User;
 import dev.a2.onlinestore.repos.UsersRepository;
@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
 	}
     
     @Override
-    public User save(UserRegistrationDto userDto){
+    public User save(UserSignupDto userDto){
     	User newUser = new User();
     	newUser.setEmail(userDto.getEmail());
     	newUser.setPassword(passwordEncoder.encode(userDto.getPassword()));

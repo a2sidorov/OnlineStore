@@ -1,14 +1,14 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Getting Started: Serving Web Content</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-</head>
+<head th:replace="fragments/head :: head"></head>
 <body>
-	<h1>Profile</h1>
-    <p th:text="'Email: ' + ${email}" />
-    <form th:action="@{/logout}" method="post">
+   	<div th:replace="fragments/header :: header"></div>
+	<div class="profile-div">
+		<h1>Profile</h1>
+	    <p th:text="'Email: ' + ${email}" />
+	    <form th:action="@{/logout}" method="post">
             <input type="submit" value="Sign Out"/>
-    </form>
+    	</form>
+	</div>
 </body>
 </html>

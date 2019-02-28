@@ -20,8 +20,8 @@ public class EmailValidator implements ConstraintValidator<ValidEmail, String> {
         return (validateEmail(username));
     }
 
-    private boolean validateEmail(final String email) {
-        pattern = Pattern.compile(EMAIL_PATTERN);
+    boolean validateEmail(final String email) {
+        pattern = Pattern.compile(EMAIL_PATTERN, Pattern.CASE_INSENSITIVE);
         matcher = pattern.matcher(email);
         return matcher.matches();
     }

@@ -23,15 +23,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .antMatchers("/", "/product/*", "/order/**").permitAll()
+                .antMatchers("/", "/product/*", "/order/**", "/signup").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
-                .loginPage("/login")
+                .loginPage("/signin")
                 .permitAll()
                 .and()
             .logout()
+            .logoutUrl("/signout")
+            .logoutSuccessUrl("/")
                 .permitAll();
          http.sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.ALWAYS);

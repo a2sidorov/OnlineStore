@@ -1,5 +1,12 @@
 <div class="topnav" th:fragment="header">
-	<a href="/order" th:text="'Cart (' + ${order.getNumberOfProducts()} + ')'">Cart</a>
-	<a href="#home">Sign in</a>
+    <a href="/order" th:text="'Cart (' + ${order.getNumberOfProducts()} + ')'">Cart</a>
+    <a sec:authorize="isAuthenticated()" href="javascript: document.logoutForm.submit()" role="menuitem">Sign out</a>
+    <form name="logoutForm" th:action="@{/signout}" method="post" th:hidden="true">
+        <input hidden type="submit" value="Sign Out"/>
+    </form> 
+	<a href="/signin" sec:authorize="!isAuthenticated()">Sign in</a>
+	<a href="/profile">Profile</a>
 	<a href="/">Home</a>
+
+	
 </div>

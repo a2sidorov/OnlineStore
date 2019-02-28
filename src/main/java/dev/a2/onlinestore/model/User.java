@@ -1,6 +1,9 @@
 package dev.a2.onlinestore.model;
 
 import javax.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -20,6 +23,9 @@ public class User {
 
 	@Column(name="active", columnDefinition="tinyint(1)")
     private int isActive;
+	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private List<Order> orders;
 
 	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinTable(name="users_roles",joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))

@@ -1,5 +1,7 @@
 package dev.a2.onlinestore.controller;
 
+import java.security.Principal;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -7,20 +9,23 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
+@SessionAttributes("order")
 public class MainController {
 
 	// GET login page
-   	@GetMapping(path="/login")
-   	public String showLoginPage() {
-   		return "login";
+   	@GetMapping(path="/signin")
+   	public String showSigninPage() {
+   		return "signin";
     }
 	
   	// GET hello page
   	@GetMapping(path="/profile")
-  	public String showProfilePage(Model model) {
-  		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String email = auth.getName();
-  		model.addAttribute("email", email);
+  	public String showProfilePage(Model model, Authentication auth) {
+  		System.out.println(auth.isAuthenticated());
+  		//Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+  		//auth.isAuthenticated();
+        //String email = auth.getName();
+  		model.addAttribute("email", "email");
         return "profile";
      }
   	

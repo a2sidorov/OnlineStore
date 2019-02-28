@@ -16,7 +16,7 @@ public @interface FieldMatch {
 	String field();
     String fieldMatch();
     
-	String message() default "The entered passwords do not match";
+	String message() default "Passwords do not match";
 	Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }
